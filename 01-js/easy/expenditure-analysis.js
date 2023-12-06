@@ -6,7 +6,31 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let categories = [];
+  let total_amt = [];
+  for(let i = 0; i < transactions.length; i++){
+    if(!categories.includes(transactions[i].category)){
+      //add that category
+      categories.push(transactions[i].category);
+      total_amt.push(transactions[i].price)
+    }
+    else{
+      //already exist category, just add the sum to that
+      total_amt[categories.indexOf(transactions[i].category)] = total_amt[categories.indexOf(transactions[i].category)] + transactions[i].price;
+    }
+  }
+  let res = [];
+  for(let i = 0; i < categories.length; i++){
+    const item = {
+      category: categories[i],
+      totalSpent: total_amt[i]
+    }
+    res.push(item);
+  }
+  return res
+
+
+
 }
 
 module.exports = calculateTotalSpentByCategory;
